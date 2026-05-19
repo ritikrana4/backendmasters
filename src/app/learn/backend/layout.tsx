@@ -10,12 +10,12 @@ export default function BackendLayout({ children }: { children: React.ReactNode 
       <div
         style={{
           paddingTop: "var(--header-height)",
-          paddingLeft: "var(--sidebar-width)",
+          paddingLeft: "var(--content-sidebar-offset)",
           minHeight: "100vh",
           background: "#0d1117",
         }}
       >
-        <main style={{ padding: "40px 48px", maxWidth: 1000 }}>{children}</main>
+        <main className="content-main">{children}</main>
       </div>
     </>
   );

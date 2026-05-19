@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { sidebarStore } from "@/lib/sidebarStore";
 
 export default function Header() {
   const pathname = usePathname();
@@ -24,6 +25,31 @@ export default function Header() {
         gap: "32px",
       }}
     >
+      {/* Hamburger — mobile only */}
+      {isLearn && (
+        <button
+          className="md:hidden"
+          onClick={() => sidebarStore.toggle()}
+          aria-label="Toggle sidebar"
+          style={{
+            background: "none",
+            border: "none",
+            cursor: "pointer",
+            padding: "6px",
+            color: "#8b949e",
+            display: "flex",
+            alignItems: "center",
+            flexShrink: 0,
+          }}
+        >
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <rect x="2" y="4" width="16" height="2" rx="1" />
+            <rect x="2" y="9" width="16" height="2" rx="1" />
+            <rect x="2" y="14" width="16" height="2" rx="1" />
+          </svg>
+        </button>
+      )}
+
       {/* Logo */}
       <Link
         href="/"

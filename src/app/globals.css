@@ -5,6 +5,64 @@
 :root {
   --sidebar-width: 260px;
   --header-height: 64px;
+  --content-sidebar-offset: var(--sidebar-width);
+}
+
+@media (max-width: 768px) {
+  :root {
+    --content-sidebar-offset: 0px;
+  }
+  body {
+    overflow-x: hidden;
+  }
+}
+
+/* Content main area responsive padding */
+.content-main {
+  padding: 40px 48px;
+  max-width: 1000px;
+}
+@media (max-width: 768px) {
+  .content-main {
+    padding: 20px 16px;
+  }
+}
+
+/* Sidebar overlay transition */
+.sidebar {
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+    z-index: 200 !important;
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.5);
+  }
+  .sidebar.sidebar-open {
+    transform: translateX(0);
+  }
+}
+
+/* Sidebar backdrop */
+.sidebar-backdrop {
+  display: none;
+}
+@media (max-width: 768px) {
+  .sidebar-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    top: var(--header-height);
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 199;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s;
+  }
+  .sidebar-backdrop.backdrop-visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
 }
 
 * {

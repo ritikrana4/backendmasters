@@ -2,8 +2,10 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import type { Course, Topic } from "@/lib/courses";
 import { useProgress, type ProgressStatus } from "@/hooks/useProgress";
+import { sidebarStore } from "@/lib/sidebarStore";
 
 interface SidebarProps {
   courses: Course[];
@@ -13,23 +15,69 @@ interface SidebarProps {
 export default function Sidebar({ courses, activeCourse }: SidebarProps) {
   const pathname = usePathname();
   const { getStatus } = useProgress();
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    return sidebarStore.subscribe(setIsOpen);
+  }, []);
+
+  // Close sidebar when navigating (mobile)
+  useEffect(() => {
+    sidebarStore.close();
+  }, [pathname]);
 
   return (
-    <aside
-      style={{
-        position: "fixed",
-        top: "var(--header-height)",
-        left: 0,
-        bottom: 0,
-        width: "var(--sidebar-width)",
-        background: "#0d1117",
-        borderRight: "1px solid #21262d",
-        display: "flex",
-        flexDirection: "column",
-        overflow: "hidden",
-        zIndex: 50,
-      }}
-    >
+    <>
+      {/* Backdrop — mobile only */}
+      <div
+        className={`sidebar-backdrop${isOpen ? " backdrop-visible" : ""}`}
+        onClick={() => sidebarStore.close()}
+      />
+
+      <aside
+        className={`sidebar${isOpen ? " sidebar-open" : ""}`}
+        style={{
+          position: "fixed",
+          top: "var(--header-height)",
+          left: 0,
+          bottom: 0,
+          width: "var(--sidebar-width)",
+          background: "#0d1117",
+          borderRight: "1px solid #21262d",
+          display: "flex",
+          flexDirection: "column",
+          overflow: "hidden",
+          zIndex: 50,
+        }}
+      >
+      {/* Close button — mobile only */}
+      <div
+        className="md:hidden"
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          padding: "8px 12px 0",
+        }}
+      >
+        <button
+          onClick={() => sidebarStore.close()}
+          aria-label="Close sidebar"
+          style={{
+            background: "none",
+            border: "none",
+            cursor: "pointer",
+            padding: "6px",
+            color: "#8b949e",
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M3.72 3.72a.75.75 0 0 1 1.06 0L8 6.94l3.22-3.22a.75.75 0 1 1 1.06 1.06L9.06 8l3.22 3.22a.75.75 0 1 1-1.06 1.06L8 9.06l-3.22 3.22a.75.75 0 0 1-1.06-1.06L6.94 8 3.72 4.78a.75.75 0 0 1 0-1.06z" />
+          </svg>
+        </button>
+      </div>
+
       {/* Course selector */}
       <div
         style={{
@@ -95,7 +143,8 @@ export default function Sidebar({ courses, activeCourse }: SidebarProps) {
           );
         })}
       </div>
-    </aside>
+      </aside>
+    </>
   );
 }
 
