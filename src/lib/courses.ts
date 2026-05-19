@@ -573,6 +573,96 @@ export const courses: Course[] = [
     ],
   },
   {
+    slug: "cloud-devops",
+    name: "Cloud & DevOps",
+    icon: "☁️",
+    description:
+      "Containers, orchestration, CI/CD, and cloud infrastructure. Docker, Kubernetes, Terraform, AWS, and the observability stack every backend engineer needs to ship reliably.",
+    disabled: false,
+    topics: [
+      {
+        slug: "containers-and-docker",
+        title: "Containers & Docker",
+        description: "What containers are, how they differ from VMs, Docker architecture, writing Dockerfiles, and the key commands to build, run, and inspect containers.",
+      },
+      {
+        slug: "docker-compose",
+        title: "Docker Compose",
+        description: "Orchestrate multi-service development environments with docker-compose.yml: service networking, volumes, environment variables, and common workflow commands.",
+      },
+      {
+        slug: "kubernetes",
+        title: "Kubernetes Fundamentals",
+        description: "Container orchestration at scale: Pods, Deployments, Services, and Ingress. How Kubernetes schedules workloads, handles failures, and exposes applications.",
+      },
+      {
+        slug: "ci-cd-pipelines",
+        title: "CI/CD Pipelines",
+        description: "Automate build, test, and deploy with CI/CD. GitHub Actions workflow syntax, pipeline stages, artifact registries, and deployment strategies: rolling, blue-green, canary.",
+      },
+      {
+        slug: "infrastructure-as-code",
+        title: "Infrastructure as Code",
+        description: "Define and provision cloud infrastructure declaratively with Terraform: providers, resources, state management, and remote backends for team collaboration.",
+      },
+      {
+        slug: "cloud-providers",
+        title: "Cloud Providers & Core Services",
+        description: "AWS/GCP/Azure service landscape: compute, storage, networking, and managed databases. Shared responsibility model and when to use managed services vs self-hosted.",
+      },
+      {
+        slug: "monitoring-logging",
+        title: "Monitoring & Observability",
+        description: "The three pillars — metrics, logs, and traces. Prometheus + Grafana for metrics, structured logging pipelines, and distributed tracing with OpenTelemetry.",
+      },
+    ],
+  },
+  {
+    slug: "dsa",
+    name: "Data Structures & Algorithms",
+    icon: "🧮",
+    description:
+      "Master the fundamentals of DSA for technical interviews and problem-solving. Arrays, linked lists, trees, graphs, recursion, binary search, and dynamic programming — built from first principles.",
+    disabled: false,
+    topics: [
+      {
+        slug: "recursion",
+        title: "Recursion — 5 Problems",
+        description: "Build recursion intuition through 5 progressively harder problems: factorial, Fibonacci, sum of digits, power function, and palindrome check. Call-tree diagrams for each.",
+      },
+      {
+        slug: "arrays",
+        title: "Arrays & Two-Pointer Technique",
+        description: "Array fundamentals, the two-pointer technique, sliding window pattern, and common interview problems solved with O(n) instead of O(n²).",
+      },
+      {
+        slug: "linked-lists",
+        title: "Linked Lists",
+        description: "Singly and doubly linked lists, traversal, insertion/deletion, and the fast-slow pointer technique for cycle detection and finding the middle node.",
+      },
+      {
+        slug: "binary-search",
+        title: "Binary Search",
+        description: "How binary search achieves O(log n) by halving the search space. Iterative and recursive implementations, the off-by-one trap, and finding first/last occurrence.",
+      },
+      {
+        slug: "stacks-queues",
+        title: "Stacks & Queues",
+        description: "LIFO stacks and FIFO queues, the monotonic stack technique for next-greater-element problems, and BFS with a queue.",
+      },
+      {
+        slug: "trees",
+        title: "Binary Trees & DFS/BFS",
+        description: "Tree node structure, depth-first search (inorder/preorder/postorder), breadth-first level-order traversal, tree height, and the Binary Search Tree property.",
+      },
+      {
+        slug: "dynamic-programming",
+        title: "Dynamic Programming",
+        description: "Overlapping subproblems and optimal substructure. Top-down memoization vs bottom-up tabulation, with Fibonacci and coin change as worked examples.",
+      },
+    ],
+  },
+  {
     slug: "ai",
     name: "AI Engineering",
     icon: "🤖",
