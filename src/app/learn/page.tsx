@@ -20,7 +20,7 @@ export default function LearnPage() {
           padding: "calc(var(--header-height) + 48px) 24px 80px",
         }}
       >
-        <div style={{ maxWidth: 700, margin: "0 auto" }}>
+        <div style={{ maxWidth: 960, margin: "0 auto" }}>
           <h1
             style={{
               fontSize: "1.75rem",
