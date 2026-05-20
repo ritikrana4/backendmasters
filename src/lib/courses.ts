@@ -728,43 +728,25 @@ export const courses: Course[] = [
     name: "Data Structures & Algorithms",
     icon: "🧮",
     description:
-      "Master the fundamentals of DSA for technical interviews and problem-solving. Arrays, linked lists, trees, graphs, recursion, binary search, and dynamic programming — built from first principles.",
+      "Master DSA for technical interviews — one question at a time, with step-by-step call stack animations and mental model breakdowns.",
     disabled: false,
     topics: [
       {
         slug: "recursion",
-        title: "Recursion — 5 Problems",
-        description: "Build recursion intuition through 5 progressively harder problems: factorial, Fibonacci, sum of digits, power function, and palindrome check. Call-tree diagrams for each.",
-      },
-      {
-        slug: "arrays",
-        title: "Arrays & Two-Pointer Technique",
-        description: "Array fundamentals, the two-pointer technique, sliding window pattern, and common interview problems solved with O(n) instead of O(n²).",
-      },
-      {
-        slug: "linked-lists",
-        title: "Linked Lists",
-        description: "Singly and doubly linked lists, traversal, insertion/deletion, and the fast-slow pointer technique for cycle detection and finding the middle node.",
-      },
-      {
-        slug: "binary-search",
-        title: "Binary Search",
-        description: "How binary search achieves O(log n) by halving the search space. Iterative and recursive implementations, the off-by-one trap, and finding first/last occurrence.",
-      },
-      {
-        slug: "stacks-queues",
-        title: "Stacks & Queues",
-        description: "LIFO stacks and FIFO queues, the monotonic stack technique for next-greater-element problems, and BFS with a queue.",
-      },
-      {
-        slug: "trees",
-        title: "Binary Trees & DFS/BFS",
-        description: "Tree node structure, depth-first search (inorder/preorder/postorder), breadth-first level-order traversal, tree height, and the Binary Search Tree property.",
-      },
-      {
-        slug: "dynamic-programming",
-        title: "Dynamic Programming",
-        description: "Overlapping subproblems and optimal substructure. Top-down memoization vs bottom-up tabulation, with Fibonacci and coin change as worked examples.",
+        title: "Recursion",
+        description: "Build recursion intuition through the most-asked interview questions — each with step-by-step call stack animations.",
+        subtopics: [
+          {
+            slug: "factorial",
+            title: "Factorial",
+            description: "Compute n! recursively. Understand base cases, call stack depth, and how values unwind back up.",
+          },
+          {
+            slug: "fibonacci",
+            title: "Fibonacci",
+            description: "Compute the nth Fibonacci number. See how binary recursion branches and why naive recursion is exponential.",
+          },
+        ],
       },
     ],
   },
