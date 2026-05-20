@@ -4,27 +4,27 @@ import "@primer/react-brand/fonts/fonts.css";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://panel-learn.dev"),
+  metadataBase: new URL("https://fullstackmasters.dev"),
   title: {
-    default: "Panel — Learn to Code",
-    template: "%s | Panel",
+    default: "Fullstack Masters — Learn to Code",
+    template: "%s | Fullstack Masters",
   },
   description:
-    "Interactive programming courses with hands-on coding exercises. Learn Python, Go, and more — step by step, right in your browser.",
-  keywords: ["learn python", "python tutorial", "interactive coding", "learn programming", "go tutorial"],
-  authors: [{ name: "Panel" }],
+    "Structured fullstack courses with interactive exercises. Learn Python, SQL, Backend, Frontend, System Design and more — step by step, right in your browser.",
+  keywords: ["fullstack", "learn programming", "python tutorial", "backend engineering", "system design", "frontend interview"],
+  authors: [{ name: "Fullstack Masters" }],
   openGraph: {
     type: "website",
-    siteName: "Panel",
-    title: "Panel — Learn to Code",
+    siteName: "Fullstack Masters",
+    title: "Fullstack Masters — Learn to Code",
     description:
-      "Interactive programming courses with hands-on coding exercises. Learn Python and Go step by step, right in your browser.",
+      "Structured fullstack courses with interactive exercises. Learn Python, SQL, Backend, Frontend, System Design and more.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Panel — Learn to Code",
+    title: "Fullstack Masters — Learn to Code",
     description:
-      "Interactive programming courses with hands-on coding exercises.",
+      "Structured fullstack courses with interactive exercises.",
   },
   robots: {
     index: true,

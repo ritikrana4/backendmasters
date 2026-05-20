@@ -3,9 +3,9 @@ import Link from "next/link";
 import Header from "@/components/Header";
 
 export const metadata: Metadata = {
-  title: "Panel — Learn to Code",
+  title: "Fullstack Masters — Learn to Code",
   description:
-    "Interactive programming courses. Learn Python, Go, and more — step by step, right in your browser.",
+    "Structured fullstack courses with interactive exercises. Learn Python, SQL, Backend, Frontend, and more — step by step.",
 };
 
 export default function HomePage() {

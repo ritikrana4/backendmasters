@@ -26,6 +26,8 @@ export default function Sidebar({ courses, activeCourse }: SidebarProps) {
     sidebarStore.close();
   }, [pathname]);
 
+  const activeCourseData = courses.find((c) => c.slug === activeCourse);
+
   return (
     <>
       {/* Backdrop — mobile only */}
@@ -50,73 +52,66 @@ export default function Sidebar({ courses, activeCourse }: SidebarProps) {
           zIndex: 50,
         }}
       >
-      {/* Close button — mobile only */}
-      <div
-        className="md:hidden"
-        style={{
-          display: "flex",
-          justifyContent: "flex-end",
-          padding: "8px 12px 0",
-        }}
-      >
-        <button
-          onClick={() => sidebarStore.close()}
-          aria-label="Close sidebar"
+        {/* Course name header */}
+        <div
           style={{
-            background: "none",
-            border: "none",
-            cursor: "pointer",
-            padding: "6px",
-            color: "#8b949e",
+            padding: "14px 14px 14px 16px",
+            borderBottom: "1px solid #21262d",
             display: "flex",
             alignItems: "center",
+            gap: "10px",
+            flexShrink: 0,
           }}
         >
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-            <path d="M3.72 3.72a.75.75 0 0 1 1.06 0L8 6.94l3.22-3.22a.75.75 0 1 1 1.06 1.06L9.06 8l3.22 3.22a.75.75 0 1 1-1.06 1.06L8 9.06l-3.22 3.22a.75.75 0 0 1-1.06-1.06L6.94 8 3.72 4.78a.75.75 0 0 1 0-1.06z" />
-          </svg>
-        </button>
-      </div>
+          {activeCourseData && (
+            <>
+              <span style={{ fontSize: "1.25rem", lineHeight: 1, flexShrink: 0 }}>
+                {activeCourseData.icon}
+              </span>
+              <span
+                style={{
+                  fontSize: "0.9375rem",
+                  fontWeight: 600,
+                  color: "#e6edf3",
+                  flex: 1,
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                }}
+              >
+                {activeCourseData.name}
+              </span>
+            </>
+          )}
 
-      {/* Course selector */}
-      <div
-        style={{
-          padding: "16px 12px 8px",
-          borderBottom: "1px solid #21262d",
-        }}
-      >
-        <p
-          style={{
-            fontSize: "0.6875rem",
-            fontWeight: 600,
-            color: "#8b949e",
-            textTransform: "uppercase",
-            letterSpacing: "0.08em",
-            margin: "0 0 8px 8px",
-          }}
-        >
-          Courses
-        </p>
-        <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
-          {courses.map((course) => (
-            <CourseTab
-              key={course.slug}
-              course={course}
-              active={activeCourse === course.slug}
-            />
-          ))}
+          {/* Close button — mobile only */}
+          <button
+            className="md:hidden"
+            onClick={() => sidebarStore.close()}
+            aria-label="Close sidebar"
+            style={{
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              padding: "4px",
+              color: "#8b949e",
+              flexShrink: 0,
+              lineHeight: 0,
+            }}
+          >
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+              <path d="M3.72 3.72a.75.75 0 0 1 1.06 0L8 6.94l3.22-3.22a.75.75 0 1 1 1.06 1.06L9.06 8l3.22 3.22a.75.75 0 1 1-1.06 1.06L8 9.06l-3.22 3.22a.75.75 0 0 1-1.06-1.06L6.94 8 3.72 4.78a.75.75 0 0 1 0-1.06z" />
+            </svg>
+          </button>
         </div>
-      </div>
 
-      {/* Topics list */}
-      <div
-        className="sidebar-scroll"
-        style={{ flex: 1, overflowY: "auto", padding: "12px 12px 24px" }}
-      >
-        {courses.map((course) => {
-          if (activeCourse !== course.slug || course.disabled) return null;
-          return (
-            <div key={course.slug}>
+        {/* Topics list */}
+        <div
+          className="sidebar-scroll"
+          style={{ flex: 1, overflowY: "auto", padding: "12px 12px 24px" }}
+        >
+          {activeCourseData && !activeCourseData.disabled && (
+            <div>
               <p
                 style={{
                   fontSize: "0.6875rem",
@@ -129,12 +124,12 @@ export default function Sidebar({ courses, activeCourse }: SidebarProps) {
               >
                 Topics
               </p>
-              {course.topics.map((topic, idx) =>
+              {activeCourseData.topics.map((topic, idx) =>
                 topic.subtopics && topic.subtopics.length > 0 ? (
                   <TopicGroup
                     key={topic.slug}
                     topic={topic}
-                    courseSlug={course.slug}
+                    courseSlug={activeCourseData.slug}
                     index={idx + 1}
                     pathname={pathname}
                   />
@@ -142,76 +137,18 @@ export default function Sidebar({ courses, activeCourse }: SidebarProps) {
                   <TopicLink
                     key={topic.slug}
                     topic={topic}
-                    courseSlug={course.slug}
+                    courseSlug={activeCourseData.slug}
                     index={idx + 1}
-                    active={pathname === `/learn/${course.slug}/${topic.slug}`}
-                    status={getStatus(course.slug, topic.slug)}
+                    active={pathname === `/learn/${activeCourseData.slug}/${topic.slug}`}
+                    status={getStatus(activeCourseData.slug, topic.slug)}
                   />
                 )
               )}
             </div>
-          );
-        })}
-      </div>
+          )}
+        </div>
       </aside>
     </>
-  );
-}
-
-function CourseTab({
-  course,
-  active,
-}: {
-  course: Course;
-  active: boolean;
-}) {
-  const inner = (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        gap: "10px",
-        padding: "8px 10px",
-        borderRadius: 6,
-        cursor: course.disabled ? "not-allowed" : "pointer",
-        background: active ? "#161b22" : "transparent",
-        border: active ? "1px solid #30363d" : "1px solid transparent",
-        opacity: course.disabled ? 0.45 : 1,
-        transition: "background 0.15s, border-color 0.15s",
-      }}
-    >
-      <span style={{ fontSize: "1.1rem", lineHeight: 1 }}>{course.icon}</span>
-      <div style={{ flex: 1, minWidth: 0 }}>
-        <div
-          style={{
-            fontSize: "0.8125rem",
-            fontWeight: 500,
-            color: active ? "#e6edf3" : "#cdd9e5",
-            whiteSpace: "nowrap",
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-          }}
-        >
-          {course.name}
-        </div>
-        {course.disabled && (
-          <div style={{ fontSize: "0.6875rem", color: "#6e7681", marginTop: 1 }}>
-            Coming soon
-          </div>
-        )}
-      </div>
-    </div>
-  );
-
-  if (course.disabled) return <div>{inner}</div>;
-
-  return (
-    <Link
-      href={`/learn/${course.slug}`}
-      style={{ textDecoration: "none", display: "block" }}
-    >
-      {inner}
-    </Link>
   );
 }
 
@@ -279,14 +216,7 @@ function TopicLink({
           {topic.title}
         </span>
         {dot && (
-          <span
-            style={{
-              fontSize: "0.75rem",
-              color: dot.color,
-              flexShrink: 0,
-              lineHeight: 1,
-            }}
-          >
+          <span style={{ fontSize: "0.75rem", color: dot.color, flexShrink: 0, lineHeight: 1 }}>
             {dot.symbol}
           </span>
         )}
@@ -309,14 +239,12 @@ function TopicGroup({
   const isInGroup = pathname.startsWith(`/learn/${courseSlug}/${topic.slug}/`);
   const [expanded, setExpanded] = useState(isInGroup);
 
-  // Auto-expand when navigating into this group
   useEffect(() => {
     if (isInGroup) setExpanded(true);
   }, [isInGroup]);
 
   return (
     <div style={{ marginBottom: "2px" }}>
-      {/* Group header */}
       <button
         onClick={() => setExpanded((v) => !v)}
         style={{
@@ -359,7 +287,6 @@ function TopicGroup({
         >
           {topic.title}
         </span>
-        {/* Chevron */}
         <svg
           width="12"
           height="12"
@@ -376,7 +303,6 @@ function TopicGroup({
         </svg>
       </button>
 
-      {/* Subtopics */}
       {expanded && topic.subtopics && (
         <div
           style={{

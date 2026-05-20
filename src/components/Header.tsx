@@ -22,10 +22,10 @@ export default function Header() {
         display: "flex",
         alignItems: "center",
         padding: "0 24px",
-        gap: "32px",
+        gap: "16px",
       }}
     >
-      {/* Hamburger — mobile only */}
+      {/* Hamburger — mobile only, inside learn pages */}
       {isLearn && (
         <button
           className="md:hidden"
@@ -37,8 +37,7 @@ export default function Header() {
             cursor: "pointer",
             padding: "6px",
             color: "#8b949e",
-            display: "flex",
-            alignItems: "center",
+            lineHeight: 0,
             flexShrink: 0,
           }}
         >
@@ -59,6 +58,7 @@ export default function Header() {
           gap: "8px",
           textDecoration: "none",
           flexShrink: 0,
+          flex: 1,
         }}
       >
         <div
@@ -70,6 +70,7 @@ export default function Header() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            flexShrink: 0,
           }}
         >
           <svg width="16" height="16" viewBox="0 0 16 16" fill="white">
@@ -84,16 +85,9 @@ export default function Header() {
             letterSpacing: "-0.01em",
           }}
         >
-          Panel
+          Fullstack Masters
         </span>
       </Link>
-
-      {/* Nav links */}
-      <nav style={{ display: "flex", alignItems: "center", gap: "4px", flex: 1 }}>
-        <NavLink href="/learn" active={isLearn}>
-          Learn
-        </NavLink>
-      </nav>
 
       {/* Right side */}
       <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
@@ -117,33 +111,5 @@ export default function Header() {
         </a>
       </div>
     </header>
-  );
-}
-
-function NavLink({
-  href,
-  active,
-  children,
-}: {
-  href: string;
-  active: boolean;
-  children: React.ReactNode;
-}) {
-  return (
-    <Link
-      href={href}
-      style={{
-        padding: "6px 12px",
-        borderRadius: 6,
-        fontSize: "0.875rem",
-        fontWeight: 500,
-        textDecoration: "none",
-        color: active ? "#e6edf3" : "#8b949e",
-        background: active ? "#161b22" : "transparent",
-        transition: "color 0.15s, background 0.15s",
-      }}
-    >
-      {children}
-    </Link>
   );
 }
