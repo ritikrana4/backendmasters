@@ -5,12 +5,14 @@ import QuestionContent from "@/components/QuestionContent";
 
 import { content as factorial } from "@/content/dsa/recursion/factorial";
 import { content as fibonacci } from "@/content/dsa/recursion/fibonacci";
+import { content as atoi } from "@/content/dsa/recursion/atoi";
 
 type ContentMap = Record<string, typeof factorial>;
 
 const contentMap: ContentMap = {
   factorial,
   fibonacci,
+  atoi,
 };
 
 export async function generateStaticParams() {

@@ -746,6 +746,11 @@ export const courses: Course[] = [
             title: "Fibonacci",
             description: "Compute the nth Fibonacci number. See how binary recursion branches and why naive recursion is exponential.",
           },
+          {
+            slug: "atoi",
+            title: "Recursive atoi()",
+            description: "Convert a string of digits to an integer recursively. Build the number digit by digit using place value and the call stack.",
+          },
         ],
       },
     ],
