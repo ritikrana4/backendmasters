@@ -1,7 +1,14 @@
+export interface SubTopic {
+  slug: string;
+  title: string;
+  description: string;
+}
+
 export interface Topic {
   slug: string;
   title: string;
   description: string;
+  subtopics?: SubTopic[];
 }
 
 export interface Course {
@@ -591,6 +598,48 @@ export const courses: Course[] = [
         description: "Orchestrate multi-service development environments with docker-compose.yml: service networking, volumes, environment variables, and common workflow commands.",
       },
       {
+        slug: "docker",
+        title: "Docker — Deep Dive",
+        description: "Complete Docker mastery: architecture internals, Dockerfile best practices, networking, volumes, multi-stage builds, registry management, and container security.",
+        subtopics: [
+          {
+            slug: "architecture",
+            title: "Docker Architecture",
+            description: "Daemon, CLI, containerd, image layers, and how Docker's client-server model works under the hood.",
+          },
+          {
+            slug: "dockerfile",
+            title: "Writing Dockerfiles",
+            description: "Every Dockerfile instruction, layer caching, .dockerignore, and best practices for small, reproducible images.",
+          },
+          {
+            slug: "networking",
+            title: "Docker Networking",
+            description: "Bridge, host, overlay, and custom networks. Port mapping, container DNS, and inter-container communication.",
+          },
+          {
+            slug: "volumes",
+            title: "Volumes & Persistent Storage",
+            description: "Named volumes, bind mounts, tmpfs, and strategies for managing stateful data in containers.",
+          },
+          {
+            slug: "multi-stage",
+            title: "Multi-stage Builds",
+            description: "Use multiple FROM stages to compile in one image and produce a minimal production image with COPY --from.",
+          },
+          {
+            slug: "registry",
+            title: "Registry & Image Management",
+            description: "Docker Hub, private registries (ECR, GCR), tagging strategies, and the full push/pull workflow.",
+          },
+          {
+            slug: "security",
+            title: "Container Security",
+            description: "Non-root users, read-only filesystems, image scanning, secrets management, and Linux capabilities.",
+          },
+        ],
+      },
+      {
         slug: "kubernetes",
         title: "Kubernetes Fundamentals",
         description: "Container orchestration at scale: Pods, Deployments, Services, and Ingress. How Kubernetes schedules workloads, handles failures, and exposes applications.",
@@ -609,6 +658,63 @@ export const courses: Course[] = [
         slug: "cloud-providers",
         title: "Cloud Providers & Core Services",
         description: "AWS/GCP/Azure service landscape: compute, storage, networking, and managed databases. Shared responsibility model and when to use managed services vs self-hosted.",
+      },
+      {
+        slug: "aws",
+        title: "AWS — Amazon Web Services",
+        description: "Master the core AWS services every backend engineer uses: IAM, EC2, S3, VPC, RDS, Lambda, ECS, CloudWatch, SQS/SNS, and CloudFront.",
+        subtopics: [
+          {
+            slug: "iam",
+            title: "IAM & Identity Management",
+            description: "Users, groups, roles, and policies. Principle of least privilege, STS temporary credentials, and IAM for EC2 and Lambda.",
+          },
+          {
+            slug: "ec2",
+            title: "EC2 & Compute",
+            description: "Instance types, AMIs, security groups, key pairs, EBS volumes, Auto Scaling Groups, and pricing models (On-Demand, Reserved, Spot).",
+          },
+          {
+            slug: "s3",
+            title: "S3 & Object Storage",
+            description: "Buckets, objects, IAM and bucket policies, versioning, lifecycle rules, static hosting, and pre-signed URLs.",
+          },
+          {
+            slug: "vpc",
+            title: "VPC & Networking",
+            description: "Subnets (public/private), route tables, Internet Gateway, NAT Gateway, Security Groups vs NACLs, and VPC peering.",
+          },
+          {
+            slug: "rds",
+            title: "RDS & Managed Databases",
+            description: "Managed relational databases, instance classes, Multi-AZ high availability, read replicas, automated backups, and connection pooling.",
+          },
+          {
+            slug: "lambda",
+            title: "Lambda & Serverless",
+            description: "Execution model, cold starts, triggers (API Gateway, S3, SQS), layers, concurrency limits, and environment variables.",
+          },
+          {
+            slug: "ecs",
+            title: "ECS, Fargate & EKS",
+            description: "Task definitions, services, Fargate vs EC2 launch type, ECR container registry, and when to use ECS vs EKS.",
+          },
+          {
+            slug: "cloudwatch",
+            title: "CloudWatch & Observability",
+            description: "Metrics, log groups, alarms, dashboards, CloudWatch Insights, and how to wire services to a central observability stack.",
+          },
+          {
+            slug: "sqs-sns",
+            title: "SQS, SNS & Messaging",
+            description: "SQS queues, visibility timeout, dead-letter queues, SNS topics and subscriptions, fan-out pattern, and FIFO queues.",
+          },
+          {
+            slug: "cloudfront",
+            title: "CloudFront & CDN",
+            description: "Distributions, origins, cache behaviors, edge locations, Origin Access Identity for S3, and cache invalidation.",
+          },
+        ],
       },
       {
         slug: "monitoring-logging",
@@ -756,4 +862,9 @@ export function getCourse(slug: string): Course | undefined {
 export function getTopic(courseSlug: string, topicSlug: string): Topic | undefined {
   const course = getCourse(courseSlug);
   return course?.topics.find((t) => t.slug === topicSlug);
+}
+
+export function getSubtopic(courseSlug: string, topicSlug: string, subtopicSlug: string): SubTopic | undefined {
+  const topic = getTopic(courseSlug, topicSlug);
+  return topic?.subtopics?.find((s) => s.slug === subtopicSlug);
 }
